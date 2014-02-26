@@ -10,3 +10,10 @@
 	</aside>
 </div>
 <p><%= @user.email %></p>
+<p>Activities I've done</p>
+
+<ul>
+<% @activities.each do |activity| %>
+  <li><%= activity.name %>, calories: <%= activity.calories %></li>
+<% end %>
+</ul>

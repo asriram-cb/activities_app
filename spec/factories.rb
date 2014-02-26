@@ -9,4 +9,9 @@ FactoryGirl.define do
       admin true
     end
   end
+  
+  factory :activity do
+    sequence(:name) { |n| "Thing to do" }
+    sequence(:calories) { |n| 1 }
+  end
 end
