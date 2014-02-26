@@ -4,6 +4,8 @@ class CreateActions < ActiveRecord::Migration
       t.belongs_to :user
       t.belongs_to :activity
       t.datetime :completed
+      t.integer :user_id
+      t.integer :activity_id
 
       t.timestamps
     end
