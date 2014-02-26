@@ -11,8 +11,6 @@ def sign_in(user, options={})
 		# Sign in when not using Cabybara
 		remember_token = User.new_remember_token
 		cookies[:remember_token] = remember_token
-		#post sessions_path, :email => user.email, :password => user.password
-		#post sessions_path, {:session => { :email => user.email, :password => user.password }
 		user.update_attribute(:remember_token, User.encrypt(remember_token))
 	else
 		visit signin_path
