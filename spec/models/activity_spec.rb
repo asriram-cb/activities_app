@@ -19,6 +19,14 @@ describe Activity do
     it { should_not be_valid }
   end
 
+  describe "when name is not unique" do
+    before do
+      Activity.create!(name: "sleep", calories: 25)
+      @activity.save
+    end
+    it { should_not be_valid }
+  end
+
   describe "when name is fewer than three characters long" do
     before { @activity.name = "ab" }
     it { should_not be_valid }
