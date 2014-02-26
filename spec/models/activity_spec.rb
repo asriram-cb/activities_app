@@ -12,4 +12,35 @@ describe Activity do
 
   it { should respond_to(:name) }
   it { should respond_to(:calories) }
+  it { should be_valid }
+
+  describe "when name is not present" do
+    before { @activity.name = " " }
+    it { should_not be_valid }
+  end
+
+  describe "when name is fewer than three characters long" do
+    before { @activity.name = "ab" }
+    it { should_not be_valid }
+  end
+
+  describe "when name is greater than 50 characters long" do
+    before { @activity.name = "aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeef" }
+    it { should_not be_valid }
+  end
+
+  describe "when calories is not present" do
+    before { @activity.calories = " " }
+    it { should_not be_valid }
+  end
+
+  describe "when calories is negative" do
+    before { @activity.calories = -1 }
+    it { should_not be_valid }
+  end
+
+  describe "when calories is not numerical" do
+    before { @activity.calories = "four" }
+    it { should_not be_valid }
+  end
 end

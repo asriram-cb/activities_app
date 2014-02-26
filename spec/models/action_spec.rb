@@ -16,4 +16,20 @@ describe Action do
   it { should respond_to(:completed) }
   it { should respond_to(:user_id) }
   it { should respond_to(:activity_id) }
+  it { should be_valid }
+
+  describe "when completed time is not present" do
+    before { @action.completed = " " }
+    it { should_not be_valid }
+  end
+
+  describe "when user id is not present" do
+    before { @action.user_id = " " }
+    it { should_not be_valid }
+  end
+
+  describe "when activity id is not present" do
+    before { @action.activity_id = " " }
+    it { should_not be_valid }
+  end
 end
