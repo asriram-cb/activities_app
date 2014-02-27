@@ -53,4 +53,9 @@ describe Activity do
     before { @activity.calories = "four" }
     it { should_not be_valid }
   end
+
+  describe "when calories is floating point" do
+    before { @activity.calories = 1.1 }
+    it { should_not be_valid }
+  end
 end

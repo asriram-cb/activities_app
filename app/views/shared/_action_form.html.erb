@@ -1,0 +1,15 @@
+<%= form_for(@action) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :minutes %>
+  <div class="field">
+    <%= f.text_field :minutes, placeholder: "1-300" %>
+  </div>
+
+  <%= f.label :completed %>
+  <div class="field">
+    <%= f.datetime_field :completed, placeholder: Time.now %>
+  </div>
+
+  <%= f.submit "Do", class: "btn btn-large btn-primary" %>
+<% end %>

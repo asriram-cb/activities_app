@@ -20,9 +20,13 @@ ActiveRecord::Schema.define(version: 20140226181810) do
     t.integer  "user_id"
     t.integer  "activity_id"
     t.datetime "completed"
+    t.integer  "minutes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "actions", ["activity_id"], name: "index_actions_on_activity_id", using: :btree
+  add_index "actions", ["user_id"], name: "index_actions_on_user_id", using: :btree
 
   create_table "activities", force: true do |t|
     t.string   "name"

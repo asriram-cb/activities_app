@@ -17,6 +17,7 @@ FactoryGirl.define do
 
   factory :action do
     completed 1.day.ago
+    minutes Random.rand(1..300)
     user
     activity
   end

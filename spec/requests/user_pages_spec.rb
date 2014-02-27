@@ -61,8 +61,8 @@ describe "User Pages" do
     let(:activity1) { FactoryGirl.create(:activity, name: "Activity 1") }
     let(:activity2) { FactoryGirl.create(:activity, name: "Activity 2") }
 
-    let!(:a1) { FactoryGirl.create(:action, user: user, activity: activity1, completed: 1.week.ago) }
-    let!(:a2) { FactoryGirl.create(:action, user: user, activity: activity2, completed: 5.days.ago) }
+    let!(:a1) { FactoryGirl.create(:action, user: user, activity: activity1, completed: 1.week.ago, minutes: rand(1..300)) }
+    let!(:a2) { FactoryGirl.create(:action, user: user, activity: activity2, completed: 5.days.ago, minutes: rand(1..300)) }
 
     before { visit user_path(user) }
 
