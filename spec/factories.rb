@@ -18,6 +18,5 @@ FactoryGirl.define do
   factory :action do
     completed 1.day.ago
     user
-    #activity
   end
 end
