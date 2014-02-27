@@ -38,7 +38,7 @@ namespace :db do
     15.times do |n|
       act_id = rand(1..Activity.count)
       completed = Time.now - n.days
-      users.each { |user| user.actions.create!(completed: completed,
+      users.each { |user| user.acts.create!(completed: completed,
                                               minutes: rand(1..300),
                                               activity_id: act_id) }
     end

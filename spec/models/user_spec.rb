@@ -15,7 +15,7 @@ describe User do
 	it { should respond_to(:remember_token) }
 	it { should respond_to(:authenticate) }
   it { should respond_to(:admin) }
-  it { should respond_to(:actions) }
+  it { should respond_to(:acts) }
   it { should respond_to(:activities) }
 
 	it { should be_valid }
@@ -123,25 +123,25 @@ describe User do
 		its(:remember_token) { should_not be_blank }
 	end
 
-  describe "actions associations" do
+  describe "acts associations" do
     before { @user.save }
-    let!(:older_action) do
-      FactoryGirl.create(:action, user: @user, activity_id: 1, completed: 1.day.ago)
+    let!(:older_act) do
+      FactoryGirl.create(:act, user: @user, activity_id: 1, completed: 1.day.ago)
     end
-    let!(:newer_action) do
-      FactoryGirl.create(:action, user: @user, activity_id: 2, completed: 1.hour.ago)
-    end
-
-    it "should have the right actions in the right order" do
-      expect(@user.actions.to_a).to eq [newer_action, older_action]
+    let!(:newer_act) do
+      FactoryGirl.create(:act, user: @user, activity_id: 2, completed: 1.hour.ago)
     end
 
-    it "should destroy associated actions" do
-      actions = @user.actions.to_a #make a copy
+    it "should have the right acts in the right order" do
+      expect(@user.acts.to_a).to eq [newer_act, older_act]
+    end
+
+    it "should destroy associated acts" do
+      acts = @user.acts.to_a #make a copy
       @user.destroy
-      expect(actions).not_to be_empty #safety check
-      actions.each do |action|
-        expect(Action.where(id: action.id)).to be_empty
+      expect(acts).not_to be_empty #safety check
+      acts.each do |act|
+        expect(Action.where(id: act.id)).to be_empty
       end
     end
   end

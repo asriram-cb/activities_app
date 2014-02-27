@@ -4,13 +4,13 @@
       <%= render 'shared/user_info' %>
     </section>
     <section>
-      <%= render 'shared/action_form' %>
+      <%= render 'shared/act_form' %>
     </section>
   </aside>
   <div class="span9">
     <h1>Welcome, <%= current_user.name %>!</h1>
 
-    <% if current_user.actions.count > 0 %>
+    <% if current_user.acts.count > 0 %>
       <h2>Ready to do more fun stuff?</h2>
     <% else %>
       <h2>Start by doing some fun stuff!</h2>

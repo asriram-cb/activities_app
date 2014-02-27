@@ -15,7 +15,7 @@ FactoryGirl.define do
     calories 1
   end
 
-  factory :action do
+  factory :act do
     completed 1.day.ago
     minutes Random.rand(1..300)
     user

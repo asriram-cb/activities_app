@@ -61,20 +61,20 @@ describe "User Pages" do
     let(:activity1) { FactoryGirl.create(:activity, name: "Activity 1") }
     let(:activity2) { FactoryGirl.create(:activity, name: "Activity 2") }
 
-    let!(:a1) { FactoryGirl.create(:action, user: user, activity: activity1, completed: 1.week.ago, minutes: rand(1..300)) }
-    let!(:a2) { FactoryGirl.create(:action, user: user, activity: activity2, completed: 5.days.ago, minutes: rand(1..300)) }
+    let!(:a1) { FactoryGirl.create(:act, user: user, activity: activity1, completed: 1.week.ago, minutes: rand(1..300)) }
+    let!(:a2) { FactoryGirl.create(:act, user: user, activity: activity2, completed: 5.days.ago, minutes: rand(1..300)) }
 
     before { visit user_path(user) }
 
     it { should have_content(user.name) }
     it { should have_title(user.name) }
 
-    describe "should show actions" do
+    describe "should show acts" do
       it { should have_content(a1.activity.name) }
       it { should have_content(a2.activity.name) }
       it { should have_content(a1.activity.calories) }
       it { should have_content(a2.activity.calories) }
-      it { should have_content(user.actions.count) }
+      it { should have_content(user.acts.count) }
     end
   end
 

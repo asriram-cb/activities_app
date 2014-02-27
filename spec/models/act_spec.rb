@@ -1,21 +1,21 @@
 require 'spec_helper'
 
-describe Action do
+describe Act do
   let(:user) { FactoryGirl.create(:user) }
   let(:activity) { FactoryGirl.create(:activity) }
 
   before do
-    @user_action = user.actions.build(
+    @user_act = user.acts.build(
                 completed: Time.now,
                 minutes: 30,
                 activity_id: activity.id)
-    @activity_action = activity.actions.build(
+    @activity_act = activity.acts.build(
                 completed: Time.now,
                 minutes: 30,
                 user_id: user.id)
   end
 
-  subject { @activity_action }
+  subject { @activity_act }
 
   it { should respond_to(:completed) }
   it { should respond_to(:minutes) }
@@ -25,7 +25,7 @@ describe Action do
   its(:activity) { should eq activity }
   it { should be_valid }
 
-  subject { @user_action }
+  subject { @user_act }
 
   it { should respond_to(:completed) }
   it { should respond_to(:minutes) }
@@ -36,42 +36,42 @@ describe Action do
   it { should be_valid }
 
   describe "when completed time is not present" do
-    before { @user_action.completed = " " }
+    before { @user_act.completed = " " }
     it { should_not be_valid }
   end
 
   describe "when minute duration is not present" do
-    before { @user_action.minutes = " " }
+    before { @user_act.minutes = " " }
     it { should_not be_valid }
   end
 
   describe "when minute duration is not numerical" do
-    before { @user_action.minutes = "a" }
+    before { @user_act.minutes = "a" }
     it { should_not be_valid }
   end
 
   describe "when minute duration is floating point" do
-    before { @user_action.minutes = 1.1 }
+    before { @user_act.minutes = 1.1 }
     it { should_not be_valid }
   end
 
   describe "when minute duration is too low" do
-    before { @user_action.minutes = 0 }
+    before { @user_act.minutes = 0 }
     it { should_not be_valid }
   end
 
   describe "when minute duration is too high" do
-    before { @user_action.minutes = 301 }
+    before { @user_act.minutes = 301 }
     it { should_not be_valid }
   end
 
   describe "when user id is not present" do
-    before { @user_action.user_id = nil }
+    before { @user_act.user_id = nil }
     it { should_not be_valid }
   end
 
   describe "when activity id is not present" do
-    before { @user_action.activity_id = " " }
+    before { @user_act.activity_id = " " }
     it { should_not be_valid }
   end
 end

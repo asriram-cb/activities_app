@@ -99,15 +99,15 @@ describe "Authentication" do
         end
       end
 
-      describe "in the Actions controller" do
+      describe "in the Acts controller" do
 
         describe "submitting to the create action" do
-          before { post actions_path }
+          before { post acts_path }
           specify { expect(response).to redirect_to(signin_path) }
         end
 
         describe "submitting to the destroy action" do
-          before { delete action_path(FactoryGirl.create(:action)) }
+          before { delete act_path(FactoryGirl.create(:act)) }
           specify { expect(response).to redirect_to(signin_path) }
         end
       end

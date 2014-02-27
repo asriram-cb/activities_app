@@ -1,8 +1,8 @@
 class Activity < ActiveRecord::Base
 
   # relationships
-  has_many :actions
-  has_many :users, through: :actions
+  has_many :acts
+  has_many :users, through: :acts
 
   # validations
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }, uniqueness: true
