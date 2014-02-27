@@ -16,7 +16,7 @@
 
     <% (1..Activity.count).to_a.sort{ rand() - 0.5 }[0..Activity.count].each do |n| %>
       <% @link_title = Activity.find(n).name.capitalize + '!' %>
-      <a href="/" class="btn btn-large btn-primary act-creator" id="act-creator-<%= n.to_s %>"><%= @link_title %></a>
+      <a href="/" class="btn btn-default act-creator" id="act-creator-<%= n.to_s %>"><%= @link_title %></a>
     <% end %>
 
     <%= render 'shared/act_form' %>
