@@ -9,11 +9,11 @@ gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'pg', '0.15.1'
-gem 'pry'
-gem 'pry-debugger'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
+  gem 'pry'
+  gem 'pry-debugger'
   # The following optional lines are part of the advanced setup.
   #gem 'guard-rspec', '2.5.0'
   #gem 'spork-rails', '4.0.0'
