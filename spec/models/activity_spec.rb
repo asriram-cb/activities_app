@@ -12,6 +12,8 @@ describe Activity do
 
   it { should respond_to(:name) }
   it { should respond_to(:calories) }
+  it { should respond_to(:actions) }
+  it { should respond_to(:users) }
   it { should be_valid }
 
   describe "when name is not present" do

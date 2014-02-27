@@ -15,6 +15,8 @@ describe User do
 	it { should respond_to(:remember_token) }
 	it { should respond_to(:authenticate) }
   it { should respond_to(:admin) }
+  it { should respond_to(:actions) }
+  it { should respond_to(:activities) }
 
 	it { should be_valid }
   it { should_not be_admin }
@@ -96,28 +98,51 @@ describe User do
 	end
 
 	describe "with a password that's too short" do
-    	before { @user.password = @user.password_confirmation = "a" * 5 }
+    before { @user.password = @user.password_confirmation = "a" * 5 }
     	it { should be_invalid }
+  end
+
+	describe "return value of authenticate method" do
+  	before { @user.save }
+  	let(:found_user) { User.find_by(email: @user.email) }
+
+  	describe "with valid password" do
+    		it { should eq found_user.authenticate(@user.password) }
   	end
 
-  	describe "return value of authenticate method" do
-    	before { @user.save }
-    	let(:found_user) { User.find_by(email: @user.email) }
+  	describe "with invalid password" do
+    		let(:user_for_invalid_password) { found_user.authenticate("invalid") }
 
-    	describe "with valid password" do
-      		it { should eq found_user.authenticate(@user.password) }
-    	end
-
-    	describe "with invalid password" do
-      		let(:user_for_invalid_password) { found_user.authenticate("invalid") }
-
-      		it { should_not eq user_for_invalid_password }
-      		specify { expect(user_for_invalid_password).to be_false }
-    	end
+    		it { should_not eq user_for_invalid_password }
+    		specify { expect(user_for_invalid_password).to be_false }
   	end
+	end
 
-  	describe "remember token" do
-  		before { @user.save }
-  		its(:remember_token) { should_not be_blank }
-  	end
+	describe "remember token" do
+		before { @user.save }
+		its(:remember_token) { should_not be_blank }
+	end
+
+  describe "actions associations" do
+    before { @user.save }
+    let!(:older_action) do
+      FactoryGirl.create(:action, user: @user, activity_id: 1, completed: 1.day.ago)
+    end
+    let!(:newer_action) do
+      FactoryGirl.create(:action, user: @user, activity_id: 2, completed: 1.hour.ago)
+    end
+
+    it "should have the right actions in the right order" do
+      expect(@user.actions.to_a).to eq [newer_action, older_action]
+    end
+
+    it "should destroy associated actions" do
+      actions = @user.actions.to_a #make a copy
+      @user.destroy
+      expect(actions).not_to be_empty #safety check
+      actions.each do |action|
+        expect(Action.where(id: action.id)).to be_empty
+      end
+    end
+  end
 end

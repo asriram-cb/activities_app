@@ -14,4 +14,10 @@ FactoryGirl.define do
     sequence(:name) { |n| "Thing to do" }
     sequence(:calories) { |n| 1 }
   end
+
+  factory :action do
+    completed 1.day.ago
+    user
+    #activity
+  end
 end

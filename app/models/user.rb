@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
 	# relationships
-	has_many :actions
+	has_many :actions, dependent: :destroy
 	has_many :activities, through: :actions
 
 	# filters
