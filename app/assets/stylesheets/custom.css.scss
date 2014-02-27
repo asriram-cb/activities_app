@@ -199,10 +199,15 @@ input {
   }
 }
 .activity_name {
-  display: block;
+	color: $black;
+	display: block;
+}
+.act_minutes, .act_calories {
+  color: $gray;
 }
 .completed {
   color: $grayLight;
+  display: block;
 }
 .gravatar {
   float: left;

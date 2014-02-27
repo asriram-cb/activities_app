@@ -12,7 +12,7 @@ FactoryGirl.define do
   
   factory :activity do
     name "Thing to do"
-    calories 1
+    calories 546
   end
 
   factory :act do
