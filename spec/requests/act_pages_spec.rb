@@ -22,12 +22,6 @@ describe "Act pages" do
       end
     end
 
-    describe "with valid information" do
-
-      before { fill_in 'act_minutes', with: rand(1..300) }
-      it "should create an act" do
-        expect { click_button "Do" }.to change(Act, :count).by(1)
-      end
-    end
+    # add test for valid informationin selenium
   end
 end

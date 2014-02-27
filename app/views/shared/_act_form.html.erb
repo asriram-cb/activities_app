@@ -5,8 +5,9 @@
   <%= f.text_field :minutes, placeholder: "1-300" %>
 
   <%= f.label :completed %>
-    <!--<%= f.datetime_local_field :completed, placeholder: Time.now %> -->
   <%= select_datetime Time.now, :prefix => :completed_input %>
+
+  <%= f.hidden_field :activity_id %>
 
   <%= f.submit "Do", class: "btn btn-large btn-primary" %>
 <% end %>
