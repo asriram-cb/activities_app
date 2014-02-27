@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
 
 	# relationships
-	has_many :actions, dependent: :destroy
-	has_many :activities, through: :actions
+	has_many :acts, dependent: :destroy
+	has_many :activities, through: :acts
 
 	# filters
 	before_save { self.email = email.downcase }

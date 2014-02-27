@@ -1,2 +1,2 @@
-module ActionsHelper
+module ActsHelper
 end

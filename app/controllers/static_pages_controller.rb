@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-    @action = current_user.acts.build if signed_in?
+    @act = current_user.acts.build if signed_in?
   end
 
   def help
