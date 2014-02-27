@@ -113,7 +113,7 @@ describe "User Pages" do
         before { click_button submit }
         let(:user) { User.find_by(email: 'user@example.com') }
 
-        it { should have_title(user.name) }
+        it { should have_title('') } # root page
         it { should have_selector('div', text: 'Welcome') }
         it { should have_link('Sign out', href: signout_path) } # test that it signs you in
       end

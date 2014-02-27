@@ -2,7 +2,6 @@ class ActsController < ApplicationController
   before_action :signed_in_user
 
   def create
-    binding.pry
     @act = current_user.acts.build(act_params)
     @act.completed = DateTime.civil(params[:completed_input][:year].to_i, 
                         params[:completed_input][:month].to_i, 
