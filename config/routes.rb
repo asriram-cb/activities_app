@@ -2,9 +2,9 @@ SampleApp::Application.routes.draw do
   get "activities/show"
   get "actions/new"
     resources :users
-    resources :sessions, only: [:new, :create, :destroy] # index, edit, update, show
-    resources :actions
-    resources :activities
+    resources :sessions,    only: [:new, :create, :destroy] # index, edit, update, show
+    resources :actions,     only: [:create, :destroy]
+    resources :activities,  only: [:create, :destroy, :update, :new]
     root  'static_pages#home'
     get 'こんにちは', to: 'static_pages#help' #fuckin cool
     match '/help',		to: 'static_pages#help',    via: 'get'
