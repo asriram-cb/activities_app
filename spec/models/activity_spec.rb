@@ -35,7 +35,7 @@ describe Activity do
   end
 
   describe "when name is greater than 50 characters long" do
-    before { @activity.name = "aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeef" }
+    before { @activity.name = "a" * 51 }
     it { should_not be_valid }
   end
 

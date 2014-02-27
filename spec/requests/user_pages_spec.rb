@@ -21,7 +21,7 @@ describe "User Pages" do
       it { should have_selector('div.pagination') }
 
       it "should list each user" do
-        User.paginate(page: 1).each do |user|
+        User.paginate(page: 1, :per_page => 10).each do |user|
           expect(page).to have_selector('li', text: user.name)
         end
       end
@@ -58,10 +58,24 @@ describe "User Pages" do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
+    let(:activity1) { FactoryGirl.create(:activity, name: "Activity 1") }
+    let(:activity2) { FactoryGirl.create(:activity, name: "Activity 2") }
+
+    let!(:a1) { FactoryGirl.create(:action, user: user, activity: activity1, completed: 1.week.ago) }
+    let!(:a2) { FactoryGirl.create(:action, user: user, activity: activity2, completed: 5.days.ago) }
+
     before { visit user_path(user) }
 
     it { should have_content(user.name) }
     it { should have_title(user.name) }
+
+    describe "should show actions" do
+      it { should have_content(a1.activity.name) }
+      it { should have_content(a2.activity.name) }
+      it { should have_content(a1.activity.calories) }
+      it { should have_content(a2.activity.calories) }
+      it { should have_content(user.actions.count) }
+    end
   end
 
   describe "signup" do

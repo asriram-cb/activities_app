@@ -37,7 +37,7 @@ describe Action do
   end
 
   describe "when user id is not present" do
-    before { @user_action.user_id = " " }
+    before { @user_action.user_id = nil }
     it { should_not be_valid }
   end
 

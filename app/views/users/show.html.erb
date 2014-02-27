@@ -1,19 +1,29 @@
 <% provide(:title, @user.name) %>
 <div class="row">
+
 	<aside class="span4">
 		<section>
 			<h1>
 				<%= gravatar_for @user, size: 40 %>
 				<%= @user.name %>
 			</h1>
+      <h2><%= @user.email %></h2>
 		</section>
 	</aside>
-</div>
-<p><%= @user.email %></p>
-<p>Activities I've done</p>
 
-<ul>
-<% @activities.each do |activity| %>
-  <li><%= activity.name %>, calories: <%= activity.calories %></li>
-<% end %>
-</ul>
+  <div class="span8">
+    <% if @user.actions.any? %>
+      <h3>I've done <%= @actions.count %> activities</h3>
+    
+      <ul>
+        <%= render @actions %>
+      </ul>
+      <%= will_paginate @actions %>
+    <% else %>
+      <h3>I haven't done any activities</h3>
+      <% if current_user == @user %>
+        <p><%= link_to "Do some.", root_url %></p>
+      <% end %>
+    <% end %>
+  </div>
+</div>
