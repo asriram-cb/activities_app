@@ -141,7 +141,7 @@ describe User do
       @user.destroy
       expect(acts).not_to be_empty #safety check
       acts.each do |act|
-        expect(Action.where(id: act.id)).to be_empty
+        expect(Act.where(id: act.id)).to be_empty
       end
     end
   end

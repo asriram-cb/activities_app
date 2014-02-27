@@ -1,4 +1,4 @@
-class CreateActions < ActiveRecord::Migration
+class CreateActs < ActiveRecord::Migration
   def change
     create_table :acts do |t|
       t.belongs_to :user
