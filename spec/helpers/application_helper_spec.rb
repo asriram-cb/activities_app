@@ -8,7 +8,7 @@ describe ApplicationHelper do
         end
 
         it "should include the base title" do
-            expect(full_title("foo")).to match(/^Activities App/)
+            expect(full_title("foo")).to match(/^Life is Amazing/)
         end
 
         it "should not include a pipe for the home page" do
