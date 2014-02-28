@@ -13,6 +13,7 @@ class ActsController < ApplicationController
       flash[:success] = "You completed the " + @act.activity.name + " activity!"
       redirect_to root_url
     else
+      @feed_items = []
       render 'static_pages/home'
     end
   end

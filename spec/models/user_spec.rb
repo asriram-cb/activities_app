@@ -17,6 +17,7 @@ describe User do
   it { should respond_to(:admin) }
   it { should respond_to(:acts) }
   it { should respond_to(:activities) }
+  it { should respond_to(:feed) }
 
 	it { should be_valid }
   it { should_not be_admin }
@@ -143,6 +144,16 @@ describe User do
       acts.each do |act|
         expect(Act.where(id: act.id)).to be_empty
       end
+    end
+
+    describe "feed" do
+      let!(:another_act) do
+        FactoryGirl.create(:act, user: @user, activity_id: 3, completed: 30.minutes.ago)
+      end
+
+      its(:feed) { should include(older_act) }
+      its(:feed) { should include(newer_act) }
+      its(:feed) { should include(another_act) }
     end
   end
 end

@@ -4,7 +4,8 @@
       <%= render 'shared/user_info' %>
     </section>
     <section>
-      <%= render 'shared/recent_acts' %>
+      <h3>activity feed</h3>
+      <%= render 'shared/feed' %>
     </section>
   </aside>
   <div class="span8">
@@ -17,9 +18,12 @@
       <h2>Start by doing some fun stuff!</h2>
     <% end %>
 
-    <% (1..Activity.count).to_a.sort{ rand() - 0.5 }[0..Activity.count].each do |n| %>
-      <% @link_title = Activity.find(n).name.capitalize + '!' %>
-      <a href="/" class="btn btn-default act-creator" id="act-creator-<%= n.to_s %>"><%= @link_title %></a>
+    <% activity_ids ||= [] %>
+    <% Activity.all.each { |a| activity_ids.push a.id } %>
+
+    <% activity_ids.sort{ rand() - 0.5 }[0..Activity.count].each do |id| %>
+      <% link_title = Activity.find(id).name.capitalize + '!' %>
+      <a href="/" class="btn btn-default act-creator" id="act-creator-<%= id.to_s %>"><%= link_title %></a>
     <% end %>
 
     <%= render 'shared/act_form' %>

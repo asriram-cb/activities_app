@@ -216,6 +216,7 @@ a.act-creator.btn {
 }
 .act_minutes, .act_calories {
   color: $gray;
+  display: inline-block;
 }
 .act_completed {
   color: $grayLight;
