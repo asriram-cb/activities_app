@@ -154,9 +154,15 @@ input, textarea, select, .uneditable-input {
 	margin-bottom: 15px;
 	@include box_sizing;
 }
+select {
+	width: auto;
+}
 
 input {
 	height: auto !important;
+}
+input.btn[type='submit'] {
+	display: block
 }
 
 #error_explanation {
@@ -185,6 +191,12 @@ input {
       border-bottom: 1px solid $grayLighter;
     }
 	}
+}
+
+/* home page with act buttons */
+
+a.act-creator.btn {
+	margin: 5px;
 }
 
 /* user profile page with acts */
