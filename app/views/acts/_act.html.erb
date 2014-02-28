@@ -2,5 +2,5 @@
   <span class="activity_name"><%= act.activity.name.capitalize %></span>
   <span class="act_calories">burned <%= act.activity.calories %> calories</span>
   <span class="act_minutes">in <%= minutes_in_words(act.minutes) %></span>
-  <span class="completed">Completed <%= time_ago_in_words(act.completed) %> ago.</span>
+  <span class="act_completed">Completed <%= time_ago_in_words(act.completed) %> ago.</span>
 </li>

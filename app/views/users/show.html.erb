@@ -15,7 +15,7 @@
     <% if @user.acts.any? %>
       <h3>I've done <%= @acts.count %> activities</h3>
     
-      <ul class="actions">
+      <ul class="acts">
         <%= render @acts %>
       </ul>
       <%= will_paginate @acts %>

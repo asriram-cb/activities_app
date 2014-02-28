@@ -1,0 +1,8 @@
+<% if current_user.acts.any? %>
+  <h3>recent activities</h3>
+
+  <ul class="acts">
+    <%= render current_user.acts[0,3] %>
+  </ul>
+
+<% end %>
