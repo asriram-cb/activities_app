@@ -3,4 +3,9 @@
   <span class="act_calories">burned <%= act.activity.calories %> calories</span>
   <span class="act_minutes">in <%= minutes_in_words(act.minutes) %></span>
   <span class="act_completed">Completed <%= time_ago_in_words(act.completed) %> ago.</span>
+  <% if current_user?(act.user) %>
+    <%= link_to "delete", act, method: :delete,
+        data: { confirm: "You sure?" },
+        title: act.activity.name %>
+  <% end %>
 </li>

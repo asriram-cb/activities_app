@@ -5,4 +5,9 @@
     <span class="act_calories">burned <%= feed_item.activity.calories %> calories</span>
   <span class="act_minutes">in <%= minutes_in_words(feed_item.minutes) %></span>
   <span class="act_completed">Completed <%= time_ago_in_words(feed_item.completed) %> ago.</span>
+  <% if current_user?(feed_item.user) %>
+    <%= link_to "delete", feed_item, method: :delete,
+        data: { confirm: "You sure?" },
+        title: feed_item.activity.name %>
+  <% end %>
 </li>

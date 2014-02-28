@@ -1,5 +1,6 @@
 class ActsController < ApplicationController
-  before_action :signed_in_user
+  before_action :signed_in_user, only: [:create, :destroy]
+  before_action :correct_user,   only: :destroy
 
   def create
     @act = current_user.acts.build(act_params)
@@ -19,16 +20,18 @@ class ActsController < ApplicationController
   end
 
   def destroy
-    if current_user == @act.user
-      @act.destroy
-    else
-      redirect_to root_url
-    end
+    @act.destroy 
+    redirect_to root_url
   end
 
   private
 
     def act_params
       params.require(:act).permit(:minutes, :activity_id)
+    end
+
+    def correct_user
+      @act = current_user.acts.find_by(id: params[:id])
+      redirect_to root_url if @act.nil?
     end
 end

@@ -23,5 +23,19 @@ describe "Act pages" do
     end
 
     # add test for valid informationin selenium
+
+    describe "act destruction" do
+      let(:act) { FactoryGirl.create(:activity, name: "something blah") }
+      
+      before { FactoryGirl.create(:act, user: user, activity: act, completed: Time.now, minutes: rand(1..300)) }
+
+      describe "as correct user" do
+        before { visit root_path } # already here
+
+        it "should delete an act" do
+          expect { click_link 'delete' }.to change(Act, :count).by(-1)
+        end
+      end
+    end
   end
 end
