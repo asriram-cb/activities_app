@@ -8,7 +8,7 @@ module ActsHelper
 
   def total_calories(as)
     act_calories = as.collect do |a|
-      if a.activity_id != nil
+      if a.activity_id != nil && a.activity != nil
         a.activity.calories
       else
         0

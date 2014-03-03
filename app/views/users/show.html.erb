@@ -9,7 +9,7 @@
 			</h1>
       <span><%= @user.email %></span>
       <span><%= pluralize(@acts.count, "activity") %></span>
-      <span><%= total_calories(@user.acts) %> calories</span>
+      <span><%= pluralize(total_calories(@user.acts), "calorie") %></span>
 		</section>
 	</aside>
 

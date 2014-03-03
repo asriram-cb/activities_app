@@ -33,6 +33,21 @@ describe "Static pages" do
           expect(page).to have_selector("li##{item.id}", text: item.activity.name)
         end
       end
+
+      it "should render the user's activity count" do
+        expect(page).to have_content("2 activities")
+      end
+
+      describe "when the count is 1" do
+        before do
+          user.acts[0].destroy
+          visit root_path
+        end
+
+        it "should not pluralize activities" do
+          expect(page).to have_content("1 activity")
+        end
+      end
     end
   end
    

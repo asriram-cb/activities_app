@@ -60,6 +60,10 @@ describe "User Pages" do
     let(:user) { FactoryGirl.create(:user) }
     let(:activity1) { FactoryGirl.create(:activity, name: "Activity 1") }
     let(:activity2) { FactoryGirl.create(:activity, name: "Activity 2") }
+    let(:activity3) { FactoryGirl.create(:activity, name: "Activity 3") }
+    let(:activity4) { FactoryGirl.create(:activity, name: "Activity 4") }
+    let(:activity5) { FactoryGirl.create(:activity, name: "Activity 5") }
+    let(:activity6) { FactoryGirl.create(:activity, name: "Activity 6") }
 
     let!(:a1) { FactoryGirl.create(:act, user: user, activity: activity1, completed: 1.week.ago, minutes: rand(1..300)) }
     let!(:a2) { FactoryGirl.create(:act, user: user, activity: activity2, completed: 5.days.ago, minutes: rand(1..300)) }
@@ -68,13 +72,42 @@ describe "User Pages" do
 
     it { should have_content(user.name) }
     it { should have_title(user.name) }
+    it { should have_content(user.acts.count) }
 
-    describe "should show acts" do
-      it { should have_content(a1.activity.name) }
-      it { should have_content(a2.activity.name) }
-      it { should have_content(a1.activity.calories) }
-      it { should have_content(a2.activity.calories) }
-      it { should have_content(user.acts.count) }
+    it "should show acts via rendering the user's feed" do
+      user.feed.each do |item|
+        expect(page).to have_selector("li##{item.id}", text: item.activity.name)
+        expect(page).to have_selector("li##{item.id}", text: item.activity.calories)
+      end
+    end
+
+    describe "should render the user's activity count" do
+      it { should have_content("2 activities") }
+    end
+
+    describe "when the acts count is 1" do
+      before do
+        a1.destroy
+        visit user_path(user)
+      end
+
+      describe "should not pluralize activities" do
+        it { should have_content("1 activity") }
+      end
+    end
+
+    describe "when the acts count is more than five" do
+      before do
+        FactoryGirl.create(:act, user: user, activity: activity3, completed: 5.days.ago, minutes: rand(1..300))
+        FactoryGirl.create(:act, user: user, activity: activity4, completed: 4.days.ago, minutes: rand(1..300))
+        FactoryGirl.create(:act, user: user, activity: activity5, completed: 3.days.ago, minutes: rand(1..300))
+        FactoryGirl.create(:act, user: user, activity: activity6, completed: 2.days.ago, minutes: rand(1..300))
+        visit user_path(user)
+      end
+
+      it "should show pagination" do
+        expect(page).to have_selector("div.pagination")
+      end
     end
   end
 
