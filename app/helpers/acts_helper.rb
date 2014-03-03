@@ -16,4 +16,8 @@ module ActsHelper
     end
     act_calories.reduce(:+)
   end
+
+  def recent_activities
+    Act.order(completed: :desc).limit(5)
+  end
 end

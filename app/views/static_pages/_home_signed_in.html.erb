@@ -1,5 +1,5 @@
 <div class="row">
-  <aside class="span4">
+  <aside class="span3">
     <section>
       <%= render 'shared/user_info' %>
     </section>
@@ -8,7 +8,7 @@
       <%= render 'shared/feed' %>
     </section>
   </aside>
-  <div class="span8">
+  <div class="span6">
     
     <h1>Welcome, <%= current_user.name %>!</h1>
 
@@ -27,5 +27,11 @@
     <% end %>
 
     <%= render 'shared/act_form' %>
+  </div>
+  <div class="span3">
+    <section>
+      <h3>public activities</h3>
+      <%= render 'shared/feed', :@feed_items => recent_activities %>
+    </section>
   </div>
 </div>
