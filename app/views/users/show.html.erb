@@ -7,17 +7,16 @@
 				<%= gravatar_for @user, size: 70 %>
 				<%= @user.name %>
 			</h1>
-      <h2><%= @user.email %></h2>
+      <span><%= @user.email %></span>
+      <span><%= pluralize(@acts.count, "activity") %></span>
+      <span><%= total_calories(@user.acts) %> calories</span>
 		</section>
 	</aside>
 
   <div class="span8">
     <% if @user.acts.any? %>
-      <h3>I've done <%= @acts.count %> activities</h3>
-    
-      <ul class="acts">
-        <%= render @acts %>
-      </ul>
+      <h3>I've done <%= pluralize(@acts.count, "activity") %></h3>
+      <%= render 'shared/feed', :@feed_items => @acts %>
       <%= will_paginate @acts %>
     <% else %>
       <h3>I haven't done any activities</h3>
