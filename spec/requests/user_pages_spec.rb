@@ -58,6 +58,7 @@ describe "User Pages" do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
+    let(:different_user) { FactoryGirl.create(:user, name: "someone else", email: "someone_else@example.com") }
     let(:activity1) { FactoryGirl.create(:activity, name: "Activity 1") }
     let(:activity2) { FactoryGirl.create(:activity, name: "Activity 2") }
     let(:activity3) { FactoryGirl.create(:activity, name: "Activity 3") }
@@ -80,6 +81,37 @@ describe "User Pages" do
         expect(page).to have_selector("li##{item.id}", text: item.activity.calories)
       end
     end
+
+    describe "when the user is signed in" do
+      before { sign_in user }
+
+      it "should show delete links for the acts" do
+        expect(page).to have_link('delete')
+      end
+
+      describe "followed by sign out" do
+        before do 
+          click_link 'Sign out'
+          visit user_path(user)
+        end
+
+        it "should not show delete links for the acts" do
+          expect(page).not_to have_link('delete')
+        end
+      end
+
+      describe "viewing another user's profile" do
+        before do
+          click_link 'Sign out'
+          sign_in different_user
+          visit user_path(user)
+        end
+
+        it "should not show delete links for the acts" do
+          expect(page).not_to have_link('delete')
+        end
+      end
+    end      
 
     describe "should render the user's activity count" do
       it { should have_content("2 activities") }
@@ -107,6 +139,13 @@ describe "User Pages" do
 
       it "should show pagination" do
         expect(page).to have_selector("div.pagination")
+      end
+    end
+
+    describe "when the current user views another user's profile page" do
+
+      it "should not show delete links for the acts" do
+        expect(page).not_to have_link('delete')
       end
     end
   end
