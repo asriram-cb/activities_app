@@ -1,5 +1,5 @@
-<%= link_to gravatar_for(current_user, size: 52), current_user %>
+<%= link_to gravatar_for(current_user, size: 70), current_user %>
 <h1><%= current_user.name %></h1>
 <span><%= link_to "view my profile", current_user %></span>
 <span><%= pluralize(current_user.acts.count, "activity") %></span>
-<!-- insert total calories here too -->
+<span><%= total_calories(current_user.acts) %> calories</span>
