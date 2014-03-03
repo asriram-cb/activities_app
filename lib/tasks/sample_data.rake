@@ -6,7 +6,7 @@ namespace :db do
                  password: "foobar",
                  password_confirmation: "foobar",
                  admin: true)
-    99.times do |n|
+    10.times do |n|
       name  = Faker::Name.name
       email = "example-#{n+1}@railstutorial.org"
       password  = "password"
@@ -34,7 +34,7 @@ namespace :db do
     Activity.create!(name: "study chess",
                     calories: 100)
 
-    users = User.all(limit: 6)
+    users = User.all
     15.times do |n|
       act_id = rand(1..Activity.count)
       completed = Time.now - n.days
