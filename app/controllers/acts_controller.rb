@@ -4,12 +4,12 @@ class ActsController < ApplicationController
 
   def create
     @act = current_user.acts.build(act_params)
-    @act.completed = DateTime.civil(params[:completed_input][:year].to_i, 
+    @act.completed = DateTime.new(params[:completed_input][:year].to_i, 
           params[:completed_input][:month].to_i, 
           params[:completed_input][:day].to_i, 
           params[:completed_input][:hour].to_i,
           params[:completed_input][:minute].to_i, 
-          params[:completed_input][:second].to_i)
+          params[:completed_input][:second].to_i).change(:offset => "-0600")
     if @act.save
       flash[:success] = "You completed the " + @act.activity.name + " activity!"
       redirect_to root_url
