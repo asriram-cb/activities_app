@@ -33,7 +33,7 @@ describe "Act pages" do
         before { visit root_path } # already here
 
         it "should delete an act" do
-          expect { click_link 'delete' }.to change(Act, :count).by(-1)
+          expect { within("#user-activity-feed") { click_link 'delete' } }.to change(Act, :count).by(-1)
         end
       end
     end

@@ -1,0 +1,8 @@
+<%= f.label :age %>
+<%= f.number_field :age, placeholder: "1-120" %>
+
+<%= f.label :weight, "Weight (in lbs)" %>
+<%= f.number_field :weight, placeholder: "155" %>
+
+<%= f.label :gender %>
+<%= f.select :gender, [['not specified', 'not specified'], ['male', 'male'], ['female', 'female']] %>

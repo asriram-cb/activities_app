@@ -5,7 +5,11 @@
   <div class="span6 offset3">
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
+      <h2>Basic Settings</h2>
       <%= render 'fields', f: f %>
+      <h2>Advanced Settings</h2>
+      <p>Fill in your age, weight, and gender for personalized calorie calculations!</p>
+      <%= render 'advanced_fields', f: f %>
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
 

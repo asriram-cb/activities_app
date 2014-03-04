@@ -3,7 +3,7 @@
     <section>
       <%= render 'shared/user_info' %>
     </section>
-    <section>
+    <section id="user-activity-feed">
       <h3>activity feed</h3>
       <%= render 'shared/feed' %>
     </section>
@@ -29,7 +29,7 @@
     <%= render 'shared/act_form' %>
   </div>
   <div class="span3">
-    <section>
+    <section id="public-activity-feed">
       <h3>public activities</h3>
       <%= render 'shared/feed', :@feed_items => recent_activities %>
     </section>
