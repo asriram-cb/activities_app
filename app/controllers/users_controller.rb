@@ -61,7 +61,7 @@ class UsersController < ApplicationController
 
     # Forces using strong parameters in the create action
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :age, :weight, :gender)
     end
 
     # Before filters
