@@ -10,6 +10,7 @@ class ActsController < ApplicationController
           params[:completed_input][:hour].to_i,
           params[:completed_input][:minute].to_i, 
           params[:completed_input][:second].to_i).change(:offset => "-0600")
+    @act.calories = ActsHelper::calculate_calories(current_user, @act.activity, @act.minutes)
     if @act.save
       flash[:success] = "You completed the " + @act.activity.name + " activity!"
       redirect_to root_url
