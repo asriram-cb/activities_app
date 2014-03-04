@@ -7,9 +7,9 @@ class ActsController < ApplicationController
     @act.completed = DateTime.civil(params[:completed_input][:year].to_i, 
           params[:completed_input][:month].to_i, 
           params[:completed_input][:day].to_i, 
-          params[:completed_input][:hours].to_i,
-          params[:completed_input][:minutes].to_i, 
-          params[:completed_input][:seconds].to_i)
+          params[:completed_input][:hour].to_i,
+          params[:completed_input][:minute].to_i, 
+          params[:completed_input][:second].to_i)
     if @act.save
       flash[:success] = "You completed the " + @act.activity.name + " activity!"
       redirect_to root_url
