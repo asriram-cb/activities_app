@@ -5,7 +5,9 @@ describe "Act pages" do
   subject { page }
 
   let(:user) { FactoryGirl.create(:user) }
-  before { sign_in user }
+  let(:complete_user) { FactoryGirl.create(:complete_user) }
+
+  before { sign_in complete_user }
 
   describe "act creation" do
     before { visit root_path } # already here
@@ -16,7 +18,7 @@ describe "Act pages" do
         expect { click_button "Do" }.not_to change(Act, :count)
       end
 
-      describe "error messages" do
+      describe "should show error messages" do
         before { click_button "Do" }
         it { should have_content('error') }
       end
@@ -27,7 +29,7 @@ describe "Act pages" do
     describe "act destruction" do
       let(:act) { FactoryGirl.create(:activity, name: "something blah") }
       
-      before { FactoryGirl.create(:act, user: user, activity: act, completed: Time.now, minutes: rand(1..300)) }
+      before { FactoryGirl.create(:act, user: complete_user, activity: act, completed: Time.now, minutes: rand(1..300)) }
 
       describe "as correct user" do
         before { visit root_path } # already here
@@ -36,6 +38,24 @@ describe "Act pages" do
           expect { within("#user-activity-feed") { click_link 'delete' } }.to change(Act, :count).by(-1)
         end
       end
+    end
+  end
+
+  describe "act creation while signed in as incomplete user" do
+    let(:act) { FactoryGirl.create(:activity, name: "something blah") }
+    before do
+      click_link 'Sign out'
+      sign_in user
+      FactoryGirl.create(:act, user: user, activity: act, completed: Time.now, minutes: rand(1..300))
+    end
+
+    it "should not create an act" do
+      expect { click_button "Do" }.not_to change(Act, :count)
+    end
+
+    describe "should show notice to update user settings" do
+      before { click_button "Do" }
+      it { should have_content("Oops! We don't have your age, gender, or weight!") }
     end
   end
 end
