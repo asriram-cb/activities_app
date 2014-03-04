@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304175812) do
+ActiveRecord::Schema.define(version: 20140226181810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: true do |t|
     t.string   "name"
-    t.integer  "calories",   default: 0
+    t.integer  "heart_rate", default: 60
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140304175812) do
     t.integer  "activity_id"
     t.datetime "completed"
     t.integer  "minutes"
+    t.integer  "calories"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -40,12 +41,12 @@ ActiveRecord::Schema.define(version: 20140304175812) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "remember_token"
-    t.boolean  "admin",           default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "age"
     t.integer  "weight"
     t.string   "gender"
+    t.boolean  "admin",           default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

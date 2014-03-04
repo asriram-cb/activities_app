@@ -2,7 +2,7 @@ class CreateActivities < ActiveRecord::Migration
   def change
     create_table :activities do |t|
       t.string :name
-      t.integer :calories, default: 0
+      t.integer :heart_rate, default: 60
 
       t.timestamps
     end

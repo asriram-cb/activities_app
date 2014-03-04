@@ -2,7 +2,7 @@
   <%= link_to gravatar_for(feed_item.user), feed_item.user %>
   <span class="user"><% link_to feed_item.user.name, feed_item.user %></span>
   <span class="activity_name"><%= feed_item.activity.name %></span>
-    <span class="act_calories">burned <%= feed_item.activity.calories %> calories</span>
+    <span class="act_calories">burned <%= feed_item.calories %> calories</span>
   <span class="act_minutes">in <%= minutes_in_words(feed_item.minutes) %></span>
   <span class="act_completed">Completed <%= time_ago_in_words(feed_item.completed) %> ago.</span>
   <%= render 'shared/delete_link', :act => feed_item %>

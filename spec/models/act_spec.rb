@@ -1,17 +1,19 @@
 require 'spec_helper'
 
 describe Act do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:complete_user) }
   let(:activity) { FactoryGirl.create(:activity) }
 
   before do
     @user_act = user.acts.build(
                 completed: Time.now,
                 minutes: 30,
+                calories: calculate_calories(user, activity, 30),
                 activity_id: activity.id)
     @activity_act = activity.acts.build(
                 completed: Time.now,
                 minutes: 30,
+                calories: calculate_calories(user, activity, 30),
                 user_id: user.id)
   end
 
@@ -19,6 +21,7 @@ describe Act do
 
   it { should respond_to(:completed) }
   it { should respond_to(:minutes) }
+  it { should respond_to(:calories) }
   it { should respond_to(:user_id) }
   it { should respond_to(:activity_id) }
   it { should respond_to(:activity) }
@@ -29,6 +32,7 @@ describe Act do
 
   it { should respond_to(:completed) }
   it { should respond_to(:minutes) }
+  it { should respond_to(:calories) }
   it { should respond_to(:user_id) }
   it { should respond_to(:user) }
   its(:user) { should eq user }
@@ -72,6 +76,26 @@ describe Act do
 
   describe "when activity id is not present" do
     before { @user_act.activity_id = " " }
+    it { should_not be_valid }
+  end
+
+  describe "when calories is not present" do
+    before { @user_act.calories = " " }
+    it { should_not be_valid }
+  end
+
+  describe "when calories is not numerical" do 
+    before { @user_act.calories = "blah" }
+    it { should_not be_valid }
+  end
+
+  describe "when calories is too low" do
+    before { @user_act.calories = 0 }
+    it { should_not be_valid }
+  end
+
+  describe "when calories is not integral" do
+    before { @user_act.calories = 35.6 }
     it { should_not be_valid }
   end
 end

@@ -5,13 +5,13 @@ describe Activity do
 
   before do
     # This code is not idiomatically correct
-    @activity = Activity.new(name: "sleep", calories: 25)
+    @activity = Activity.new(name: "sleep", heart_rate: 50)
   end
 
   subject { @activity }
 
   it { should respond_to(:name) }
-  it { should respond_to(:calories) }
+  it { should respond_to(:heart_rate) }
   it { should respond_to(:acts) }
   it { should respond_to(:users) }
   it { should be_valid }
@@ -23,7 +23,7 @@ describe Activity do
 
   describe "when name is not unique" do
     before do
-      Activity.create!(name: "sleep", calories: 25)
+      Activity.create!(name: "sleep", heart_rate: 50)
       @activity.save
     end
     it { should_not be_valid }
@@ -39,23 +39,28 @@ describe Activity do
     it { should_not be_valid }
   end
 
-  describe "when calories is not present" do
-    before { @activity.calories = " " }
+  describe "when heart_rate is not present" do
+    before { @activity.heart_rate = " " }
     it { should_not be_valid }
   end
 
-  describe "when calories is negative" do
-    before { @activity.calories = -1 }
+  describe "when heart_rate is negative" do
+    before { @activity.heart_rate = -1 }
     it { should_not be_valid }
   end
 
-  describe "when calories is not numerical" do
-    before { @activity.calories = "four" }
+  describe "when heart_rate is less than 50" do
+    before { @activity.heart_rate = 49 }
     it { should_not be_valid }
   end
 
-  describe "when calories is floating point" do
-    before { @activity.calories = 1.1 }
+  describe "when heart_rate is not numerical" do
+    before { @activity.heart_rate = "four" }
+    it { should_not be_valid }
+  end
+
+  describe "when heart_rate is floating point" do
+    before { @activity.heart_rate = 50.1 }
     it { should_not be_valid }
   end
 end

@@ -5,42 +5,56 @@ namespace :db do
                  email: "example@railstutorial.org",
                  password: "foobar",
                  password_confirmation: "foobar",
-                 admin: true)
-    10.times do |n|
+                 admin: true,
+                 age: rand(1..120),
+                 weight: rand(1..500),
+                 gender: ['male', 'female'].sample)
+    9.times do |n|
       name  = Faker::Name.name
       email = "example-#{n+1}@railstutorial.org"
       password  = "password"
       User.create!(name: name,
                    email: email,
                    password: password,
-                   password_confirmation: password)
+                   password_confirmation: password,
+                   age: rand(1..120),
+                   weight: rand(1..500),
+                   gender: ['male', 'female'].sample)
     end
     Activity.create!(name: "practice drums",
-                    calories: 250)
+                    heart_rate: 120)
     Activity.create!(name: "lift weights", 
-                    calories: 500)
+                    heart_rate: 170)
     Activity.create!(name: "run",
-                    calories: 600)
+                    heart_rate: 180)
     Activity.create!(name: "do yoga",
-                    calories: 500)
+                    heart_rate: 165)
     Activity.create!(name: "climb rocks",
-                    calories: 700)
+                    heart_rate: 165)
     Activity.create!(name: "read Gravity's Rainbow",
-                    calories: 50)
+                    heart_rate: 80)
     Activity.create!(name: "give a massage",
-                    calories: 350)
+                    heart_rate: 130)
     Activity.create!(name: "teach yoga",
-                    calories: 200)
+                    heart_rate: 120)
     Activity.create!(name: "study chess",
-                    calories: 100)
+                    heart_rate: 90)
 
     users = User.all
-    15.times do |n|
+    7.times do |n|
       act_id = rand(1..Activity.count)
       completed = Time.now - n.days
-      users.each { |user| user.acts.create!(completed: completed,
-                                              minutes: rand(1..300),
-                                              activity_id: act_id) }
+      minutes = rand(1..300)
+      activity = Activity.find(act_id)
+
+      users.each do |user|
+        calories = user.gender == "female" ? ( (user.age * 0.074) - (user.weight * 0.05741) + (activity.heart_rate * 0.4472) - 20.4022) * minutes / 4.184 : ( (user.age * 0.2017) + (user.weight * 0.09036) + (activity.heart_rate * 0.6309) - 55.0969) * minutes / 4.184
+        calories = calories.round(0) < 1 ? 1 : calories.round(0)
+        user.acts.create!(completed: completed,
+                          minutes: minutes,
+                          calories: calories,
+                          activity_id: act_id)
+      end
     end
   end
 end

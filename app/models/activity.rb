@@ -6,5 +6,5 @@ class Activity < ActiveRecord::Base
 
   # validations
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }, uniqueness: true
-  validates :calories, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :heart_rate, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 50, less_than_or_equal_to: 220 }
 end

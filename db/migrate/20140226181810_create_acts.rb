@@ -5,6 +5,7 @@ class CreateActs < ActiveRecord::Migration
       t.belongs_to :activity
       t.datetime :completed
       t.integer :minutes
+      t.integer :calories
       t.integer :user_id
       t.integer :activity_id
 

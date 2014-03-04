@@ -78,7 +78,7 @@ describe "User Pages" do
     it "should show acts via rendering the user's feed" do
       user.feed.each do |item|
         expect(page).to have_selector("li##{item.id}", text: item.activity.name)
-        expect(page).to have_selector("li##{item.id}", text: item.activity.calories)
+        expect(page).to have_selector("li##{item.id}", text: item.calories)
       end
     end
 
@@ -193,7 +193,7 @@ describe "User Pages" do
   end
 
   describe "edit" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryGirl.create(:complete_user) }
     before do
       sign_in user
       visit edit_user_path(user)
