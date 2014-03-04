@@ -22,7 +22,7 @@ describe "Act pages" do
       end
     end
 
-    # add test for valid informationin selenium
+    # TODO: add test for valid informationin selenium
 
     describe "act destruction" do
       let(:act) { FactoryGirl.create(:activity, name: "something blah") }
