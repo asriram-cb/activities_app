@@ -156,4 +156,69 @@ describe User do
       its(:feed) { should include(another_act) }
     end
   end
+
+  describe "when age is not numerical" do
+    before { @user.age = "twenty" }
+    it { should_not be_valid }
+  end
+
+  describe "when age is too low" do
+    before { @user.age = 0 } 
+    it { should_not be_valid }
+  end
+
+  describe "when age is too high" do
+    before { @user.age = 121 }
+    it { should_not be_valid }
+  end
+
+  describe "when age is decimal" do
+    before { @user.age = 20.3 }
+    it { should_not be_valid }
+  end
+
+  describe "when age is in range" do
+    before { @user.age = 50 }
+    it { should be_valid }
+  end
+
+  describe "when weight is not numerical" do
+    before { @user.weight = "one hundred and twenty" }
+    it { should_not be_valid }
+  end
+
+  describe "when weight is too low" do
+    before { @user.weight = 0 }
+    it { should_not be_valid }
+  end
+
+  describe "when weight is greater than 0" do
+    before { @user.weight = 120 }
+    it { should be_valid }
+  end
+
+  describe "when weight is decimal" do
+    before { @user.weight = 120.3 }
+    it { should_not be_valid }
+  end
+
+  describe "when gender is not male or female" do
+    before { @user.gender = "mal" }
+    it { should_not be_valid }
+  end
+
+  describe "when gender is a number" do
+    before { @user.gender = 1 }
+    it { should_not be_valid }
+  end
+
+  describe "when gender is male" do
+    before { @user.gender = "male" }
+    it { should be_valid }
+  end
+
+  describe "when gender is female" do
+    before { @user.gender = "female" }
+    it { should be_valid }
+  end
 end

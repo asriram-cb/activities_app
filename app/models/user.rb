@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
 			uniqueness: { case_insensitive: false }
 	has_secure_password
 	validates :password, length: { minimum: 6 }
+	validates :age, allow_blank: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 120 }
+	validates :weight, allow_blank: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+	validates :gender, allow_blank: true, format: { with: /male|female/, message: "must be 'male' or 'female'"}
 
 	def User.new_remember_token
 		SecureRandom.urlsafe_base64
