@@ -8,12 +8,12 @@ describe Act do
     @user_act = user.acts.build(
                 completed: Time.now,
                 minutes: 30,
-                calories: calculate_calories(user, activity, 30),
+                calories: Utilities::calculate_calories(user, activity, 30),
                 activity_id: activity.id)
     @activity_act = activity.acts.build(
                 completed: Time.now,
                 minutes: 30,
-                calories: calculate_calories(user, activity, 30),
+                calories: Utilities::calculate_calories(user, activity, 30),
                 user_id: user.id)
   end
 
