@@ -1,6 +1,8 @@
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
+    
+    # Create users
     admin = User.create!(name: "Example User",
                  email: "example@railstutorial.org",
                  password: "foobar",
@@ -21,25 +23,8 @@ namespace :db do
                    weight: rand(1..500),
                    gender: ['male', 'female'].sample)
     end
-    Activity.create!(name: "practice drums",
-                    heart_rate: 120)
-    Activity.create!(name: "lift weights", 
-                    heart_rate: 170)
-    Activity.create!(name: "run",
-                    heart_rate: 180)
-    Activity.create!(name: "do yoga",
-                    heart_rate: 165)
-    Activity.create!(name: "climb rocks",
-                    heart_rate: 165)
-    Activity.create!(name: "read Gravity's Rainbow",
-                    heart_rate: 80)
-    Activity.create!(name: "give a massage",
-                    heart_rate: 130)
-    Activity.create!(name: "teach yoga",
-                    heart_rate: 120)
-    Activity.create!(name: "study chess",
-                    heart_rate: 90)
 
+    # Create acts that users have done
     users = User.all
     7.times do |n|
       act_id = rand(1..Activity.count)
