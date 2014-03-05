@@ -7,7 +7,7 @@ describe Level do
     # give this user several activities?
     # at a certain level? 
     @level = Level.first
-    @new_level = Level.create(title: "Mega Awesome", calorie_goal: 50000, activity_goal: 60, number: 5)
+    @new_level = Level.new(title: "Mega Awesome", calorie_goal: 50000, activity_goal: 60, number: 5)
   end
 
   subject { @level }
@@ -44,7 +44,7 @@ describe Level do
   end
 
   describe "when title is greater than 20 characters long" do
-    before { @new_level.name = "a" * 21 }
+    before { @new_level.title = "a" * 21 }
     it { should_not be_valid }
   end
 
